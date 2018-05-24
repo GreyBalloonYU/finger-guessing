@@ -1,5 +1,4 @@
 #pragma once
-extern int formerhand;
 extern int i;
 extern int win;
 extern int draw;

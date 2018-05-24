@@ -4,6 +4,7 @@
 
 Strategy2::Strategy2() {
 	hand_ = 0;
+	formerhand = 0;
 }
 
 void Strategy2::sethand2() {
@@ -14,4 +15,8 @@ void Strategy2::sethand2() {
 	else if (i == 1&&first==1||i==-1&&first==0||i==0&&first==0) {
 		hand_ = formerhand;
 	}
+}
+
+int Strategy2::getFormerhand() {
+	return formerhand;
 }

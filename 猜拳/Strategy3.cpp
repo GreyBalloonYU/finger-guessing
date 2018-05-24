@@ -3,6 +3,7 @@
 #include<stdlib.h>
 Strategy3::Strategy3() {
 	hand_ = 0;
+	formerhand = 0;
 }
 
 void Strategy3::sethand3() {
@@ -17,4 +18,8 @@ void Strategy3::sethand3() {
 		} while (hand_ == formerhand);
 		formerhand = hand_;
 	}
+}
+
+int Strategy3::getFormerhand() {
+	return formerhand;
 }

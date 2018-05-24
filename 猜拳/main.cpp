@@ -8,9 +8,10 @@
 #include<stdlib.h>
 #include<Windows.h>
 #include<ctime>
+//剪刀--0，石头--1，布--2
 using namespace std;
 int i = 0;//用来判断上一轮电脑(第二个策略后手)是否赢了，赢--1,平--0,输:-1
-int formerhand = 0;//上一轮的出拳
+//int formerhand = 0;//上一轮的出拳
 int a = 1;//是否为第一轮猜拳
 int win = 0;//自动对战中第一种策略赢的局数
 int draw = 0;//自动对战中平局的局数
@@ -190,10 +191,8 @@ int main() {
 			else if (choose1 == 2 && choose2 == 2) {
 				for (int ch = 0; ch < amount; ch++) {
 					first = 0;
-					if (i == 1 && first == 1 || i == -1 && first == 0 || i == 0 && first == 0)formerhand =c.getHand();
 					c.sethand2();
 					first = 1;
-					if (i == 1 && first == 1 || i == -1 && first == 0 || i == 0 && first == 0)formerhand = c2.getHand();
 					c2.sethand2();
 					result.setGame(c.getHand(), c2.getHand());
 					result.checkwin();
@@ -230,10 +229,8 @@ int main() {
 			}
 			else if (choose1 == 3 && choose2 == 3) {
 				for (int ch = 0; ch < amount; ch++) {
-					if (ch != 0)formerhand = d.getHand();
 					d.sethand3();
 					if (ch == 0)a = 1;
-					if (ch != 0)formerhand = d2.getHand();
 					d2.sethand3();
 					result.setGame(d.getHand(), d2.getHand());
 					result.checkwin();
