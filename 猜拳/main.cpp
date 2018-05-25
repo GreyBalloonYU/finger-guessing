@@ -11,11 +11,7 @@
 //剪刀--0，石头--1，布--2
 using namespace std;
 int i = 0;//用来判断上一轮电脑(第二个策略后手)是否赢了，赢--1,平--0,输:-1
-//int formerhand = 0;//上一轮的出拳
 int a = 1;//是否为第一轮猜拳
-int win = 0;//自动对战中第一种策略赢的局数
-int draw = 0;//自动对战中平局的局数
-int lose = 0;//自动对战中第一种策略输的局数
 int first = 1;//判断在自动对战中第二种策略是先手还是后手，0--先手，1--后手
 time_t t;
 
@@ -23,7 +19,7 @@ int main() {
 	srand((unsigned)time(&t));
 	int e = 0;
 	int hand = 0;
-	int choose1 = 0, choose2 = 0, amount = 0;//记录选择策略的变量，amount代表自动对战的局数
+	int choose1 = 0, choose2 = 0, f = 0;//记录选择策略的变量
 	string outside, inside;
 	Strategy a;
 	Strategy1 b,b2;
@@ -144,17 +140,16 @@ int main() {
 		}break;
 	case 2:
        while (1) {
-		   win = 0;
-		   draw = 0;
-		   lose = 0;
+		    result.initialize();
 			cout << "选择先手AI策略:1.完全随机地决定出拳策略 2.使用赢得上一轮的出拳策略 3.出拳跟上一轮出拳绝对不同" << endl;
 			cin >> choose1;
 			cout << "选择后手AI策略:1.完全随机地决定出拳策略 2.使用赢得上一轮的出拳策略 3.出拳跟上一轮出拳绝对不同" << endl;
 			cin >> choose2;
 			cout << "请输入比赛的局数(猜几次拳)" << endl;
-			cin >> amount;
+			cin >> f;
+			result.setAmount(f);
 			if (choose1 == 1 && choose2==1) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					b.sethand1();
 					b2.sethand1();
 					result.setGame(b.getHand(), b2.getHand());
@@ -162,7 +157,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 1 && choose2 == 2) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					first = 1;
 					b.sethand1();
 					c.sethand2();
@@ -171,7 +166,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 1 && choose2 == 3) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					a = 1;
 					b.sethand1();
 					d.sethand3();
@@ -180,7 +175,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 2 && choose2 == 1) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					first = 0;
 					c.sethand2();
 					b.sethand1();
@@ -189,7 +184,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 2 && choose2 == 2) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					first = 0;
 					c.sethand2();
 					first = 1;
@@ -199,7 +194,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 2 && choose2 == 3) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					a = 1;
 					first = 0;
 					c.sethand2();
@@ -209,7 +204,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 3 && choose2 == 1) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					a = 1;
 					d.sethand3();
 					b.sethand1();
@@ -218,7 +213,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 3 && choose2 == 2) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					first = 1;
 					a = 1;
 					d.sethand3();
@@ -228,7 +223,7 @@ int main() {
 				}
 			}
 			else if (choose1 == 3 && choose2 == 3) {
-				for (int ch = 0; ch < amount; ch++) {
+				for (int ch = 0; ch < f; ch++) {
 					d.sethand3();
 					if (ch == 0)a = 1;
 					d2.sethand3();
@@ -236,8 +231,8 @@ int main() {
 					result.checkwin();
 				}
 			}
-			cout << "先手AI策略赢的局数为:" << win << "  平的局数为:" << draw << "  输的局数为:" << lose << "  胜率为:" << result.winrate(amount) << "%"<<endl;
-			cout << "总局数为:" << amount << endl;
+			cout << "先手AI策略赢的局数为:" << result.getWin() << "  平的局数为:" << result.getDraw() << "  输的局数为:" << result.getLose() << "  胜率为:" << result.winrate() << "%"<<endl;
+			cout << "总局数为:" << result.getAmount() << endl;
 		}break;
 	}
 	system("pause");

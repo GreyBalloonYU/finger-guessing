@@ -1,3 +1,4 @@
-﻿  main.cpp
+﻿  Game.cpp
+d:\码农程序库\猜拳\猜拳\game.cpp(61): warning C4715: “Game::checkwin”: 不是所有的控件路径都返回值
   猜拳.vcxproj -> D:\码农程序库\猜拳\Debug\猜拳.exe
   猜拳.vcxproj -> D:\码农程序库\猜拳\Debug\猜拳.pdb (Partial PDB)

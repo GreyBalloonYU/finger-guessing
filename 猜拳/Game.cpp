@@ -2,7 +2,10 @@
 #include"Game.h"
 //¼ôµ¶--0£¬Ê¯Í·--1£¬²¼--2
 Game::Game() {
-
+	win = 0;
+	draw = 0;
+	lose = 0;
+	amount = 0;
 }
 void Game::setGame(int outhand, int inhand) {
 	outhand_ = outhand;
@@ -57,7 +60,34 @@ int Game::checkwin() {
 	}
 }
 
-double Game::winrate(int amount) {
+double Game::winrate() {
 	double rate = win * 100 / amount;
 	return rate;
+}
+
+void Game::initialize() {
+	win = 0;
+	draw = 0;
+	lose = 0;
+	amount = 0;
+}
+
+int Game::getWin() {
+	return win;
+}
+
+int Game::getDraw() {
+	return draw;
+}
+
+int Game::getLose() {
+	return lose;
+}
+
+void Game::setAmount(int f) {
+	amount = f;
+}
+
+int Game::getAmount() {
+	return amount;
 }
